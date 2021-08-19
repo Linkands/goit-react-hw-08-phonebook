@@ -1,16 +1,26 @@
 import React from 'react'
 import { Wrapper, List, Item, DeleteButton, Header } from './Contacts.styles'
 import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
+import { visibleContacts } from '../../redux/selectors/contacts-selectors'
+import * as contactsOperations from '../../redux/operations/contacts-operations'
 
-function Contacts({ contactsData, onDeleteContact }) {
+function Contacts() {
+  const dispatch = useDispatch()
+  const contacts = useSelector(visibleContacts)
+
+  const removeContact = (id) => {
+    dispatch(contactsOperations.deleteContact(id))
+  }
+
   return (
     <Wrapper>
       <Header>Contacts</Header>
       <List>
-        {contactsData.map(({ id, name, number }) => (
+        {contacts.map(({ id, name, number }) => (
           <Item key={id}>
             {name}: {number}
-            <DeleteButton type="button" onClick={() => onDeleteContact(id)}>
+            <DeleteButton type="button" onClick={() => removeContact(id)}>
               Delete contact
             </DeleteButton>
           </Item>
