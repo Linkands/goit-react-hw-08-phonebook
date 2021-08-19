@@ -5,6 +5,8 @@ import Contacts from './components/Contacts/Contacts'
 import Filter from './components/Filter/Filter'
 import Navigation from './components/Navigation/Navigation'
 import Container from './components/Container/Container'
+import Registration from './components/Registration/Registration'
+import Login from './components/Login/Login'
 import { useSelector } from 'react-redux'
 import { contactsItems } from './redux/selectors/contacts-selectors'
 
@@ -13,19 +15,26 @@ function App() {
 
   return (
     <Container>
-      <Navigation></Navigation>
+      <Navigation />
 
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <Route exact path="/"></Route>
-          <Route path="/register"></Route>
-          <Route path="/login"></Route>
+
+          <Route path="/register">
+            <Registration />
+          </Route>
+
+          <Route path="/login">
+            <Login />
+          </Route>
+
           <Route path="/contacts">
-            <Phonebook></Phonebook>
+            <Phonebook />
             {contacts.length > 0 && (
               <>
-                <Filter></Filter>
-                <Contacts></Contacts>
+                <Filter />
+                <Contacts />
               </>
             )}
           </Route>
