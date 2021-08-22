@@ -53,7 +53,7 @@ function Phonebook() {
 
   return (
     <Wrapper>
-      <Header>Phonebook</Header>
+      <Header></Header>
       <form onSubmit={handleSubmit}>
         <InputName>Name</InputName>
         <input

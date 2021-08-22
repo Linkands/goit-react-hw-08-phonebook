@@ -1,45 +1,65 @@
-import React, { Suspense, lazy } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import React, { Suspense, useEffect } from 'react'
+import { Switch } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+
 import Phonebook from './components/Phonebook/Phonebook'
 import Contacts from './components/Contacts/Contacts'
 import Filter from './components/Filter/Filter'
-import Navigation from './components/Navigation/Navigation'
 import Container from './components/Container/Container'
 import Registration from './components/Registration/Registration'
 import Login from './components/Login/Login'
-import { useSelector } from 'react-redux'
+import AppBar from './components/AppBar/AppBar'
 import { contactsItems } from './redux/selectors/contacts-selectors'
+import { fetchCurrentUser } from './redux/auth/auth-operations'
+import { getIsFetchingCurrentUser } from './redux/auth/auth-selectors'
+
+import PrivateRoute from './components/PrivateRoute'
+import PublicRoute from './components/PublicRoute'
 
 function App() {
   const contacts = useSelector(contactsItems)
+  const dispatch = useDispatch()
+  const refreshingCurrentUser = useSelector(getIsFetchingCurrentUser)
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser())
+  }, [dispatch])
 
   return (
     <Container>
-      <Navigation />
+      {!refreshingCurrentUser && (
+        <>
+          <AppBar />
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <Switch>
-          <Route exact path="/"></Route>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              <PublicRoute exact path="/" restricted>
+                Welcome to Phonebook app! Phonebook app allows you to save your
+                contact names, phone numbers and get them any time by logging in
+                to your account.
+              </PublicRoute>
 
-          <Route path="/register">
-            <Registration />
-          </Route>
+              <PublicRoute path="/register" restricted>
+                <Registration />
+              </PublicRoute>
 
-          <Route path="/login">
-            <Login />
-          </Route>
+              <PublicRoute path="/login" redirectTo="/contacts" restricted>
+                <Login />
+              </PublicRoute>
 
-          <Route path="/contacts">
-            <Phonebook />
-            {contacts.length > 0 && (
-              <>
-                <Filter />
-                <Contacts />
-              </>
-            )}
-          </Route>
-        </Switch>
-      </Suspense>
+              <PrivateRoute path="/contacts" redirectTo="/login">
+                <Phonebook />
+                {contacts.length > 0 && (
+                  <>
+                    <Filter />
+                    <Contacts />
+                  </>
+                )}
+              </PrivateRoute>
+            </Switch>
+          </Suspense>
+        </>
+      )}
     </Container>
   )
 }

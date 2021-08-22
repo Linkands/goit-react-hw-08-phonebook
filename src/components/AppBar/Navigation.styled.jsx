@@ -14,7 +14,10 @@ export const StyledNavLink = styled(NavLink)`
   }
 `
 export const StyledNav = styled.nav`
-  text-align: center;
+  /* text-align: center; */
   padding: 10px;
   border-bottom: solid 1px black;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 `
