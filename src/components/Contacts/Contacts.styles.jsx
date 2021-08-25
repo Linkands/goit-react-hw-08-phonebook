@@ -4,19 +4,13 @@ export const Wrapper = styled.div`
   text-align: center;
 `
 export const List = styled.ul`
+  margin: 0;
+  padding: 0;
   color: #4b3b40;
 `
 export const Item = styled.li`
-  color: #82735c;
+  display: flex;
   list-style: none;
-`
-export const DeleteButton = styled.button`
-  background-color: #9db17c;
-  color: white;
-  margin-left: 20px;
-  margin-top: 10px;
-  cursor: pointer;
-`
-export const Header = styled.h2`
-  color: #4b3b40;
+  justify-content: center;
+  align-items: center;
 `

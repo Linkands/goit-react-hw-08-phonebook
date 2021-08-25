@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Wrapper } from './Filter.styles'
+import { Wrapper, Input } from './Filter.styles'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import * as contactsActions from '../../redux/actions/contacts-actions'
@@ -15,8 +15,7 @@ function Filter() {
 
   return (
     <Wrapper>
-      <Header>Find contacts by name</Header>
-      <input
+      <Input
         type="text"
         name="filter"
         onChange={handleChange}
@@ -25,6 +24,7 @@ function Filter() {
         title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
         required
         autoComplete="off"
+        placeholder="Find contacts by name"
       />
     </Wrapper>
   )

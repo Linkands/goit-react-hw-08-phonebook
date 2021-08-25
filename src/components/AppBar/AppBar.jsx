@@ -2,18 +2,21 @@ import React from 'react'
 import Navigation from './Navigation'
 import AuthNav from './AuthNav'
 import UserMenu from './UserMenu'
-import { StyledNav } from './Navigation.styled'
+import { NavWrapper } from './Navigation.styled'
 import { useSelector } from 'react-redux'
 import { getIsLoggedIn } from '../../redux/auth/auth-selectors'
+import AppBar from '@material-ui/core/AppBar'
 
-function AppBar() {
+function AppBarr() {
   const isLoggedIn = useSelector(getIsLoggedIn)
   return (
-    <StyledNav>
-      <Navigation></Navigation>
-      {isLoggedIn ? <UserMenu /> : <AuthNav />}
-    </StyledNav>
+    <AppBar position="sticky" className="Appbar">
+      <NavWrapper>
+        <Navigation />
+        {isLoggedIn ? <UserMenu /> : <AuthNav />}
+      </NavWrapper>
+    </AppBar>
   )
 }
 
-export default AppBar
+export default AppBarr

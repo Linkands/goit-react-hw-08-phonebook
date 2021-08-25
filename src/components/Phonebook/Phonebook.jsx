@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Header, SubmitButton, InputName, Wrapper } from './Phonebook.styles'
+import { Wrapper, Input, InputWrapper } from './Phonebook.styles'
 import PropTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 import * as contactsOperations from '../../redux/operations/contacts-operations'
 import { contactsItems } from '../../redux/selectors/contacts-selectors'
+import Button from '@material-ui/core/Button'
+import toast from 'react-hot-toast'
 
 function Phonebook() {
   const dispatch = useDispatch()
@@ -43,6 +45,7 @@ function Phonebook() {
       return alert(`${name} already exists in your contacts`)
     }
     dispatch(contactsOperations.addContact({ id: randomId, name, number }))
+    toast.success(`${name} successfully added`)
     eraseInputs()
   }
 
@@ -53,30 +56,35 @@ function Phonebook() {
 
   return (
     <Wrapper>
-      <Header></Header>
       <form onSubmit={handleSubmit}>
-        <InputName>Name</InputName>
-        <input
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-          required
-          onChange={handleChange}
-          value={name}
-        />
-        <InputName>Number</InputName>
-        <input
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-          required
-          onChange={handleChange}
-          value={number}
-        />
-        <br />
-        <SubmitButton type="submit">Add contact</SubmitButton>
+        <InputWrapper>
+          <Input
+            type="text"
+            name="name"
+            // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+            required
+            onChange={handleChange}
+            value={name}
+            placeholder="Name *"
+          />
+        </InputWrapper>
+
+        <InputWrapper>
+          <Input
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+            required
+            onChange={handleChange}
+            value={number}
+            placeholder="Phone number *"
+          />
+        </InputWrapper>
+        <Button variant="outlined" color="primary" type="submit">
+          Add contact
+        </Button>
       </form>
     </Wrapper>
   )

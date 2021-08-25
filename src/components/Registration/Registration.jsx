@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Header, SubmitButton, InputName, Wrapper } from './Registration.styled'
+import { Input, InputWrapper, Wrapper } from './Registration.styled'
 import { useDispatch } from 'react-redux'
 import * as authOperation from '../../redux/auth/auth-operations'
+import Button from '@material-ui/core/Button'
 
 function Registration() {
   const dispatch = useDispatch()
@@ -40,35 +41,43 @@ function Registration() {
 
   return (
     <Wrapper>
-      <Header>Registration</Header>
       <form onSubmit={handleSubmit}>
-        <InputName>Name</InputName>
-        <input
-          type="text"
-          name="name"
-          required
-          onChange={handleChange}
-          value={name}
-        />
-        <InputName>Email</InputName>
-        <input
-          type="email"
-          name="email"
-          required
-          onChange={handleChange}
-          value={email}
-          placeholder="example@mail.com"
-        />
-        <InputName>Password</InputName>
-        <input
-          type="password"
-          name="password"
-          required
-          onChange={handleChange}
-          value={password}
-        />
-        <br />
-        <SubmitButton type="submit">Register</SubmitButton>
+        <InputWrapper>
+          <Input
+            type="text"
+            name="name"
+            required
+            onChange={handleChange}
+            value={name}
+            placeholder="Name *"
+          />
+        </InputWrapper>
+
+        <InputWrapper>
+          <Input
+            type="email"
+            name="email"
+            required
+            onChange={handleChange}
+            value={email}
+            placeholder="Email *"
+          />
+        </InputWrapper>
+
+        <InputWrapper>
+          <Input
+            type="password"
+            name="password"
+            required
+            onChange={handleChange}
+            value={password}
+            placeholder="Password *"
+          />
+        </InputWrapper>
+
+        <Button variant="outlined" color="primary" type="submit">
+          Register
+        </Button>
       </form>
     </Wrapper>
   )

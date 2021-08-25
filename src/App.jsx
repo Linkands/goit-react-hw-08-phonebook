@@ -8,10 +8,12 @@ import Filter from './components/Filter/Filter'
 import Container from './components/Container/Container'
 import Registration from './components/Registration/Registration'
 import Login from './components/Login/Login'
-import AppBar from './components/AppBar/AppBar'
+import AppBarr from './components/AppBar/AppBar'
+import Home from './components/Home/Home'
 import { contactsItems } from './redux/selectors/contacts-selectors'
 import { fetchCurrentUser } from './redux/auth/auth-operations'
 import { getIsFetchingCurrentUser } from './redux/auth/auth-selectors'
+import { Toaster } from 'react-hot-toast'
 
 import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
@@ -29,14 +31,12 @@ function App() {
     <Container>
       {!refreshingCurrentUser && (
         <>
-          <AppBar />
-
+          <Toaster />
+          <AppBarr />
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
-              <PublicRoute exact path="/" restricted>
-                Welcome to Phonebook app! Phonebook app allows you to save your
-                contact names, phone numbers and get them any time by logging in
-                to your account.
+              <PublicRoute exact path="/">
+                <Home />
               </PublicRoute>
 
               <PublicRoute path="/register" restricted>
@@ -51,7 +51,7 @@ function App() {
                 <Phonebook />
                 {contacts.length > 0 && (
                   <>
-                    <Filter />
+                    {contacts.length > 1 && <Filter />}
                     <Contacts />
                   </>
                 )}

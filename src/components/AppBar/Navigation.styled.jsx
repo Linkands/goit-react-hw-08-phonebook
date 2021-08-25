@@ -4,12 +4,14 @@ import { NavLink } from 'react-router-dom'
 export const StyledNavLink = styled(NavLink)`
   &.link {
     text-decoration: none;
-    color: black;
-    margin: 10px;
+    color: white;
+    /* margin: 10px; */
+    margin-right: 10px;
     text-shadow: 1px 1px grey;
+    text-align: center;
+    margin-left: 20px;
   }
   &.activeLink {
-    color: #9db17c;
     font-size: 20px;
   }
 `
@@ -20,4 +22,13 @@ export const StyledNav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+`
+
+export const NavWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
 `

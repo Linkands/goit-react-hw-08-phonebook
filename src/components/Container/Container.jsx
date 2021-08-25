@@ -3,7 +3,33 @@ import { Wrapper } from './Container.styled'
 import PropTypes from 'prop-types'
 
 function Container({ children }) {
-  return <Wrapper>{children}</Wrapper>
+  return (
+    <>
+      <div className="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <Wrapper>{children}</Wrapper>
+    </>
+  )
 }
 
 Container.propTypes = {

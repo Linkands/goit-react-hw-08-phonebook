@@ -1,9 +1,9 @@
 import React from 'react'
-import { StyledNavLink } from './Navigation.styled'
+import { StyledNavLink, Wrapper } from './Navigation.styled'
 
 function AuthNav() {
   return (
-    <>
+    <Wrapper>
       <StyledNavLink to="/login" className="link" activeClassName="activeLink">
         Login
       </StyledNavLink>
@@ -14,7 +14,7 @@ function AuthNav() {
       >
         Register
       </StyledNavLink>
-    </>
+    </Wrapper>
   )
 }
 

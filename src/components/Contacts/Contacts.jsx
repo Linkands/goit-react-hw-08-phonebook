@@ -1,9 +1,11 @@
 import React from 'react'
-import { Wrapper, List, Item, DeleteButton, Header } from './Contacts.styles'
+import { Wrapper, List, Item } from './Contacts.styles'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import { visibleContacts } from '../../redux/selectors/contacts-selectors'
 import * as contactsOperations from '../../redux/operations/contacts-operations'
+import Delete from '@material-ui/icons/Delete'
+import toast from 'react-hot-toast'
 
 function Contacts() {
   const dispatch = useDispatch()
@@ -11,18 +13,21 @@ function Contacts() {
 
   const removeContact = (id) => {
     dispatch(contactsOperations.deleteContact(id))
+    toast.success(`Contact deleted`)
   }
 
   return (
     <Wrapper>
-      <Header>Contacts</Header>
       <List>
         {contacts.map(({ id, name, number }) => (
           <Item key={id}>
             {name}: {number}
-            <DeleteButton type="button" onClick={() => removeContact(id)}>
-              Delete contact
-            </DeleteButton>
+            <Delete
+              color="primary"
+              onClick={() => removeContact(id)}
+              cursor="pointer"
+              size="large"
+            ></Delete>
           </Item>
         ))}
       </List>

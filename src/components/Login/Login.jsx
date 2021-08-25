@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Header, SubmitButton, InputName, Wrapper } from './Login.styled'
+import { InputWrapper, Input, Wrapper } from './Login.styled'
 import { useDispatch } from 'react-redux'
 import * as authOperation from '../../redux/auth/auth-operations'
+import Button from '@material-ui/core/Button'
 
 function Login() {
   const dispatch = useDispatch()
@@ -34,27 +35,31 @@ function Login() {
   }
   return (
     <Wrapper>
-      <Header>Login</Header>
       <form onSubmit={handleSubmit}>
-        <InputName>Email</InputName>
-        <input
-          type="email"
-          name="email"
-          required
-          onChange={handleChange}
-          value={email}
-          placeholder="example@mail.com"
-        />
-        <InputName>Password</InputName>
-        <input
-          type="password"
-          name="password"
-          required
-          onChange={handleChange}
-          value={password}
-        />
-        <br />
-        <SubmitButton type="submit">Log in</SubmitButton>
+        <InputWrapper>
+          <Input
+            type="email"
+            name="email"
+            required
+            onChange={handleChange}
+            value={email}
+            placeholder="Email *"
+          />
+        </InputWrapper>
+        <InputWrapper>
+          <Input
+            type="password"
+            name="password"
+            required
+            onChange={handleChange}
+            value={password}
+            placeholder="Password *"
+          />
+        </InputWrapper>
+
+        <Button variant="outlined" color="primary" type="submit">
+          Log in
+        </Button>
       </form>
     </Wrapper>
   )
